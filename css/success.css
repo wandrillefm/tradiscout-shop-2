@@ -2,11 +2,10 @@
    TRADISCOUT — Page de confirmation commande
    ══════════════════════════════════════════════ */
 
-/* On utilise le même fond que le site principal,
-   mais ici on centre tout sur la page. */
+/* Toutes les variables proviennent de main.css :
+   --bg, --navy, --overlay */
 
 body {
-  /* Réinitialise le display du body pour un centrage vertical */
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -25,6 +24,7 @@ body {
   animation: fadeIn 0.6s ease both;
 }
 
+/* Réutilise le même @keyframes fadeIn que main.css */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -55,6 +55,7 @@ body {
   font-size: 2.4rem;
   font-weight: 400;
   line-height: 1.1;
+  letter-spacing: 2px;
   color: var(--navy);
 }
 .success-title em {
@@ -66,12 +67,12 @@ body {
 
 /* ─── Message ─────────────────────────────────── */
 .success-msg {
-  font-size: 0.9rem !important;
-  line-height: 1.7 !important;
-  color: var(--navy) !important;
-  opacity: 0.75;
+  font-family: 'Sanchez', serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--navy);
+  opacity: 0.7;
   max-width: 360px;
-  padding: 0 !important;
 }
 
 /* ─── Lien retour ─────────────────────────────── */
@@ -84,6 +85,9 @@ body {
   text-decoration: none;
   border-bottom: 1px solid rgba(10, 29, 55, 0.3);
   padding-bottom: 2px;
-  transition: border-color 0.2s, opacity 0.2s;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
 }
-.back-link:hover { border-color: var(--navy); opacity: 0.7; }
+.back-link:hover {
+  border-color: var(--navy);
+  opacity: 0.65;
+}
