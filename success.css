@@ -1,0 +1,89 @@
+/* ══════════════════════════════════════════════
+   TRADISCOUT — Page de confirmation commande
+   ══════════════════════════════════════════════ */
+
+/* On utilise le même fond que le site principal,
+   mais ici on centre tout sur la page. */
+
+body {
+  /* Réinitialise le display du body pour un centrage vertical */
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+/* ─── Wrapper ─────────────────────────────────── */
+.success-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+  padding: 2rem;
+  max-width: 480px;
+  animation: fadeIn 0.6s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Cercle check ────────────────────────────── */
+.check-ring {
+  width: 64px;
+  height: 64px;
+  border: 1.5px solid var(--navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: var(--navy);
+  animation: pop 0.5s ease both;
+}
+
+@keyframes pop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ─── Titre ───────────────────────────────────── */
+.success-title {
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--navy);
+}
+.success-title em {
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  color: #8b6914;
+}
+
+/* ─── Message ─────────────────────────────────── */
+.success-msg {
+  font-size: 0.9rem !important;
+  line-height: 1.7 !important;
+  color: var(--navy) !important;
+  opacity: 0.75;
+  max-width: 360px;
+  padding: 0 !important;
+}
+
+/* ─── Lien retour ─────────────────────────────── */
+.back-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--navy);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(10, 29, 55, 0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.2s, opacity 0.2s;
+}
+.back-link:hover { border-color: var(--navy); opacity: 0.7; }

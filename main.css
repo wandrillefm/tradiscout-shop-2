@@ -1,0 +1,257 @@
+/* ══════════════════════════════════════════════
+   TRADISCOUT — Styles principaux
+   ══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Sanchez&family=Uncial+Antiqua&display=swap');
+
+:root {
+  --bg:     #e2e5b3;
+  --navy:   #0a1d37;
+  --overlay: rgba(226, 229, 179, 0.6);
+}
+
+/* ─── Reset ─────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ─── Body ───────────────────────────────────── */
+body {
+  background-image: linear-gradient(var(--overlay), var(--overlay)), url('IMG_5189.jpeg');
+  background-size: 100% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: var(--bg);
+  color: var(--navy);
+  font-family: 'Sanchez', serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar { display: none; }
+
+/* ─── Loader ──────────────────────────────────── */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--navy);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  transition: opacity 0.6s ease;
+}
+.typewriter-text {
+  color: var(--bg);
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: 2.5rem;
+  letter-spacing: 5px;
+  border-right: 3px solid var(--bg);
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  padding-right: 5px;
+}
+.cursor-blink { animation: blink 0.7s infinite; }
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* ─── Layout principal ────────────────────────── */
+.container {
+  width: 90%;
+  max-width: 800px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+/* ─── Header ──────────────────────────────────── */
+header {
+  padding-top: 30px;
+  z-index: 600;
+}
+.logo {
+  font-family: 'Uncial Antiqua', cursive;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  font-size: 3.2rem;
+}
+.logo:hover { opacity: 0.75; }
+
+/* ─── Navigation ──────────────────────────────── */
+.main-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  z-index: 600;
+  margin-bottom: 20px;
+}
+.main-nav a {
+  text-decoration: none;
+  color: var(--navy);
+  font-size: 0.95rem;
+  transition: opacity 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--navy);
+  transition: width 0.3s ease;
+}
+.main-nav a:hover::after,
+.main-nav a.active::after { width: 100%; }
+
+/* ─── Contenu & onglets ───────────────────────── */
+.content {
+  padding-bottom: 20px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 5px;
+}
+.tab { animation: fadeIn 0.4s ease forwards; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Footer ──────────────────────────────────── */
+footer {
+  font-size: 0.85rem;
+  width: 100%;
+  z-index: 600;
+  padding-bottom: 20px;
+}
+
+/* ─── Grille réseaux sociaux ──────────────────── */
+.grid-social {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+.card-social {
+  border: 1px solid var(--navy);
+  padding: 10px 5px;
+  text-decoration: none;
+  color: var(--navy);
+  transition: background 0.2s, color 0.2s;
+  background: rgba(10, 29, 55, 0.05);
+}
+.card-social:hover { background: var(--navy); color: var(--bg); }
+.card-social span {
+  display: block;
+  font-family: 'Uncial Antiqua';
+  font-size: 1.2rem;
+}
+
+/* ─── Contact ─────────────────────────────────── */
+.mail-link { color: var(--navy); font-weight: 600; text-decoration: underline; }
+
+/* ─── Onglets code ────────────────────────────── */
+.code-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+.code-nav button {
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--navy);
+  background: transparent;
+  color: var(--navy);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: 'Sanchez', serif;
+  transition: background 0.2s, color 0.2s;
+}
+.code-nav button.active,
+.code-nav button:hover { background: var(--navy); color: var(--bg); }
+.code-tab { display: none; }
+
+textarea {
+  width: 100%;
+  padding: 8px;
+  resize: none;
+  height: 90px;
+  overflow: auto;
+  border: 1px solid var(--navy);
+  background: rgba(255,255,255,0.5);
+  font-family: 'Sanchez', serif;
+  color: var(--navy);
+  border-radius: 3px;
+  margin: 6px 0;
+}
+
+/* ─── Sémaphore ───────────────────────────────── */
+.semaphore-wrapper { margin-top: 20px; margin-bottom: 90px; }
+#semaphore-canvas,
+#semaphore-encode-canvas {
+  border-radius: 2px;
+  border: 2px solid var(--navy);
+  background: rgba(255,255,255,0.9);
+}
+
+/* ─── Mobile nav ──────────────────────────────── */
+.mobile-nav-bg { display: none; }
+
+/* ─── Responsive ──────────────────────────────── */
+@media (max-width: 768px) {
+  body { background-size: cover; }
+  .container {
+    display: block;
+    padding-top: 30px;
+    height: auto;
+    min-height: 100vh;
+  }
+  header { margin-bottom: 40px; }
+  .logo { font-size: 2.3rem; }
+  .mobile-nav-bg {
+    display: block;
+    position: fixed;
+    bottom: 0; left: 0;
+    width: 100%; height: 110px;
+    background-color: var(--bg);
+    z-index: 550;
+  }
+  .main-nav {
+    position: fixed;
+    bottom: 32px; left: 0;
+    width: 100%;
+    background-color: var(--bg);
+    padding: 10px 0 30px;
+    gap: 17px;
+  }
+  footer {
+    position: fixed;
+    bottom: 0; left: 0;
+    padding-bottom: 15px;
+    background: transparent;
+  }
+  .grid-social { grid-template-columns: repeat(2, 1fr); }
+}

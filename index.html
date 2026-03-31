@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tradiscout</title>
+  <link rel="icon" type="image/x-icon" href="FINAL.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sanchez&family=Uncial+Antiqua&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/boutique.css" />
+
+  <!-- Supabase -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body class="no-scrollbar">
+
+  <!-- ─── Loader ───────────────────────────────── -->
+  <div id="loader">
+    <div id="typewriter" class="typewriter-text cursor-blink"></div>
+  </div>
+
+  <!-- ─── Mobile nav background ────────────────── -->
+  <div class="mobile-nav-bg"></div>
+
+  <!-- ─── Bouton panier (apparaît sur onglet boutique) ── -->
+  <button id="cart-header-btn" class="cart-header-btn" onclick="openCart()">
+    Panier
+    <span class="cart-count-badge" id="cartCount">0</span>
+  </button>
+
+  <!-- ─── Contenu principal ─────────────────────── -->
+  <div class="container" id="main-content">
+
+    <header>
+      <h1 id="main-logo" class="logo" onclick="show('home')">TRADISCOUT</h1>
+    </header>
+
+    <nav class="main-nav">
+      <a onclick="show('home')"      data-tab="home">accueil</a>
+      <a onclick="show('rejoindre')" data-tab="rejoindre">rejoindre</a>
+      <a onclick="show('boutique')"  data-tab="boutique">boutique</a>
+      <a onclick="show('code')"      data-tab="code">code</a>
+      <a onclick="show('contact')"   data-tab="contact">contact</a>
+    </nav>
+
+    <main class="content">
+
+      <!-- ══════ ACCUEIL ══════ -->
+      <div id="home" class="tab">
+        <p>
+          Depuis début 2025, nous aidons les jeunes à vivre leur foi tous les jours,
+          par le scoutisme. Ce qui n'était au départ qu'un simple compte insta de rigolade,
+          est devenu une véritable communauté animée par une équipe de 7 jeunes,
+          offrant à tous des débats, du contenu, et des nouvelles sur le scoutisme
+          et la chrétienté à travers l'Europe et plus particulièrement en France.
+        </p>
+      </div>
+
+      <!-- ══════ REJOINDRE ══════ -->
+      <div id="rejoindre" class="tab" style="display:none">
+        <div class="grid-social">
+          <a href="https://instagram.com/tradiscout" class="card-social" target="_blank">
+            <small>Instagram</small><span>4200+ personnes</span>
+          </a>
+          <a href="https://pinterest.com/tradiscout" class="card-social" target="_blank">
+            <small>Pinterest</small><span>20+ fonds d'écran</span>
+          </a>
+          <a href="https://instagram.com/channel/AbYQB1ZxjbUUhCE5" class="card-social" target="_blank">
+            <small>Groupe de prière</small><span>Tous les vendredis</span>
+          </a>
+          <a href="https://www.deezer.com/fr/playlist/13549630343" class="card-social" target="_blank">
+            <small>Deezer</small><span>615 titres</span>
+          </a>
+          <a href="https://open.spotify.com/playlist/4dol5mUeugWo8hvZdXnvZ8" class="card-social" target="_blank">
+            <small>Spotify</small><span>494 titres</span>
+          </a>
+          <a href="https://tradiscout.notion.site/Tradiscout-2ac8736dad9f80ff9adadb6e2fb1165a" class="card-social" target="_blank">
+            <small>Notion</small><span>Ressources</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ══════ BOUTIQUE ══════ -->
+      <div id="boutique" class="tab" style="display:none">
+
+        <div class="shop-hero">
+          <h2>La <em>boutique</em><br>scout.</h2>
+          <p>Configurez votre article, ajoutez-le au panier.</p>
+        </div>
+
+        <div class="shop-layout">
+
+          <!-- Aperçu visuel -->
+          <div class="preview-zone">
+            <div class="garment-visual" id="garmentVisual">
+              <div class="garment-shape" id="garmentShape"></div>
+              <div class="design-preview" id="designPreview">Sélectionnez<br>un design</div>
+              <div class="garment-label"  id="garmentLabel">—</div>
+              <div class="price-display"  id="priceDisplay">—</div>
+            </div>
+          </div>
+
+          <!-- Panel de configuration -->
+          <div class="config-panel">
+
+            <div class="config-section">
+              <div class="config-label">01 — Vêtement</div>
+              <div class="options-grid">
+                <button class="opt-btn" data-type="tshirt" data-price="17" onclick="selectOption('type', this)">
+                  T-Shirt<span class="opt-price">17 €</span>
+                </button>
+                <button class="opt-btn" data-type="sweat" data-price="33" onclick="selectOption('type', this)">
+                  Sweat<span class="opt-price">33 €</span>
+                </button>
+                <button class="opt-btn" data-type="hoodie" data-price="37" onclick="selectOption('type', this)">
+                  Hoodie<span class="opt-price">37 €</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="config-section">
+              <div class="config-label">02 — Taille</div>
+              <div class="sizes-row">
+                <button class="size-btn" onclick="selectOption('size', this)" data-size="S">S</button>
+                <button class="size-btn" onclick="selectOption('size', this)" data-size="M">M</button>
+                <button class="size-btn" onclick="selectOption('size', this)" data-size="L">L</button>
+              </div>
+            </div>
+
+            <div class="config-section">
+              <div class="config-label">03 — Couleur</div>
+              <div class="colors-row">
+                <button class="color-btn" onclick="selectOption('color', this)" data-color="blanc">
+                  <span class="color-dot blanc"></span>Blanc
+                </button>
+                <button class="color-btn" onclick="selectOption('color', this)" data-color="marine">
+                  <span class="color-dot marine"></span>Marine
+                </button>
+              </div>
+            </div>
+
+            <div class="config-section">
+              <div class="config-label">04 — Citation</div>
+              <div class="designs-grid">
+                <button class="design-btn" onclick="selectOption('design', this)" data-design="1">
+                  <span class="design-num">Design 01</span>
+                  « Laisse Dieu agir,<br>et agis avec Dieu. »
+                </button>
+                <button class="design-btn" onclick="selectOption('design', this)" data-design="2">
+                  <span class="design-num">Design 02</span>
+                  « Toujours prêt,<br>toujours debout. »
+                </button>
+                <button class="design-btn" onclick="selectOption('design', this)" data-design="3">
+                  <span class="design-num">Design 03</span>
+                  « Per aspera<br>ad astra. »
+                </button>
+                <button class="design-btn" onclick="selectOption('design', this)" data-design="4">
+                  <span class="design-num">Design 04</span>
+                  « Verso l'Alto —<br>toujours plus haut. »
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <button class="add-btn" id="addBtn" disabled onclick="addToCart()">
+                + Ajouter au panier
+              </button>
+              <div class="missing-msg" id="missingMsg">Complétez tous les choix</div>
+            </div>
+
+          </div><!-- /config-panel -->
+        </div><!-- /shop-layout -->
+
+        <!-- Toast -->
+        <div class="shop-toast" id="shopToast"></div>
+
+      </div><!-- /boutique -->
+
+      <!-- ══════ CODE ══════ -->
+      <div id="code" class="tab" style="display:none">
+
+        <div class="code-nav">
+          <button onclick="showCodeTab('code-semaphore', this)" class="active">Sémaphore</button>
+          <button onclick="showCodeTab('code-morse', this)">Morse</button>
+          <button onclick="showCodeTab('code-caesar', this)">César</button>
+          <button onclick="showCodeTab('code-vigenere', this)">Vigenère</button>
+        </div>
+
+        <!-- Sémaphore -->
+        <div id="code-semaphore" class="code-tab" style="display:block">
+          <p>Fais tourner les bras du sémaphore pour voir la lettre correspondante.</p>
+          <div class="semaphore-wrapper">
+            <canvas id="semaphore-canvas" width="260" height="260"></canvas>
+            <p>Lettre détectée : <span id="semaphore-letter">?</span></p>
+          </div>
+          <img src="alphabet-semaphore.jpg" alt="Alphabet sémaphore" style="max-width:100%;border-radius:4px;" />
+        </div>
+
+        <!-- Morse -->
+        <div id="code-morse" class="code-tab">
+          <p>Écris du texte ou du morse dans la zone du haut, le résultat apparaît en dessous.</p>
+          <textarea id="morse-input"  placeholder="Texte ou Morse"></textarea>
+          <textarea id="morse-output" placeholder="Résultat" readonly style="background:rgba(10,29,55,0.05)"></textarea>
+        </div>
+
+        <!-- César -->
+        <div id="code-caesar" class="code-tab">
+          <p>Choisis un décalage et écris ton texte.</p>
+          <label>Décalage :
+            <input type="number" id="shift" value="3" min="0" max="25"
+              style="width:60px;padding:4px;margin:10px;border:1px solid var(--navy);background:rgba(255,255,255,0.5);font-family:'Sanchez',serif;" />
+          </label>
+          <textarea id="caesar-input"  placeholder="Texte clair"></textarea>
+          <textarea id="caesar-output" placeholder="Résultat" readonly style="background:rgba(10,29,55,0.05)"></textarea>
+        </div>
+
+        <!-- Vigenère -->
+        <div id="code-vigenere" class="code-tab">
+          <p>Le code Vigenère utilise un mot-clé pour crypter le message. C'est un César qui change à chaque lettre !</p>
+          <div style="display:flex;gap:10px;margin-bottom:10px;">
+            <input type="text" id="vig-key" placeholder="MOT-CLÉ (ex: SCOUT)"
+              style="flex:2;padding:8px;text-transform:uppercase;border:1px solid var(--navy);background:rgba(255,255,255,0.5);font-family:'Sanchez',serif;" />
+            <select id="vig-mode"
+              style="flex:1;padding:8px;background:transparent;border:1px solid var(--navy);color:var(--navy);border-radius:4px;font-family:'Sanchez',serif;">
+              <option value="encode">Chiffrer</option>
+              <option value="decode">Déchiffrer</option>
+            </select>
+          </div>
+          <textarea id="vig-input"  placeholder="Message à traiter"></textarea>
+          <textarea id="vig-output" placeholder="Résultat" readonly style="background:rgba(10,29,55,0.05)"></textarea>
+        </div>
+
+      </div><!-- /code -->
+
+      <!-- ══════ CONTACT ══════ -->
+      <div id="contact" class="tab" style="display:none">
+        <p>Vous souhaitez nous envoyer une photo, une suggestion ou rejoindre l'équipe ?</p>
+
+        <form id="contact-form" style="max-width:400px;margin:20px auto;text-align:left;">
+          <label for="contact-email">Votre email :</label>
+          <input type="email" id="contact-email" required
+            style="width:100%;padding:8px;margin:8px 0;border:1px solid var(--navy);background:rgba(255,255,255,0.5);font-family:'Sanchez',serif;border-radius:3px;" />
+
+          <label for="contact-message">Votre question / message :</label>
+          <textarea id="contact-message" required
+            style="height:120px;"></textarea>
+
+          <button type="submit" id="contact-submit"
+            style="width:100%;margin-top:10px;padding:10px;border:1px solid var(--navy);background:var(--navy);color:var(--bg);font-family:'Sanchez',serif;font-size:0.9rem;cursor:pointer;border-radius:4px;transition:0.2s;">
+            Envoyer le message
+          </button>
+        </form>
+
+        <p id="contact-status" style="margin-top:15px;font-weight:bold;"></p>
+
+        <hr style="margin:20px 0;border:0;border-top:1px solid var(--navy);opacity:0.3;" />
+        <p>Ou directement par mail :
+          <a href="mailto:tradiscout@gmail.com" class="mail-link">tradiscout@gmail.com</a>
+        </p>
+      </div>
+
+    </main>
+
+    <footer>
+      <p>2026 Tradiscout — Verso l'Alto!</p>
+    </footer>
+  </div><!-- /container -->
+
+  <!-- ══════ DRAWER PANIER ══════ -->
+  <div class="cart-overlay" id="shopCartOverlay" onclick="closeCart()"></div>
+  <div class="cart-drawer"  id="shopCartDrawer">
+    <div class="cart-header">
+      <div class="cart-title">Mon panier</div>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="shopCartItems">
+      <div class="cart-empty">Panier vide</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount" id="shopCartTotal">0 €</span>
+      </div>
+      <button class="checkout-btn" id="shopCheckoutBtn" disabled onclick="goToCheckout()">
+        <span class="checkout-text">Payer →</span>
+        <span class="checkout-loading">Redirection…</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── Scripts ────────────────────────────────── -->
+  <script src="js/main.js"></script>
+  <script src="js/codes.js"></script>
+  <script src="js/boutique.js"></script>
+  <script src="js/contact.js"></script>
+
+</body>
+</html>
