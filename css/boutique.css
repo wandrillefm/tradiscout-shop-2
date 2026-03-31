@@ -4,41 +4,46 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap');
 
-/* Variables boutique (héritées dans le contexte du site principal) */
+/* Toutes les variables sont héritées de main.css :
+   --bg, --navy, --overlay
+   On en ajoute quelques-unes propres à la boutique. */
 :root {
-  --noir:    #0e0e0e;
-  --marine:  #1a2744;
-  --blanc:   #f5f2eb;
-  --or:      #c9a84c;
-  --or-clair:#e8d5a3;
-  --gris:    #6b6b6b;
+  --or:      #8b6914;
+  --or-pale: rgba(139, 105, 20, 0.12);
+  --border:  rgba(10, 29, 55, 0.15);
 }
 
-/* ─── Conteneur boutique (onglet) ─────────────── */
+/* ─── Conteneur boutique ──────────────────────── */
 #boutique {
   width: 100%;
   padding-bottom: 100px;
 }
 
 /* ─── Hero boutique ───────────────────────────── */
-.shop-hero {
-  margin-bottom: 2rem;
-}
+.shop-hero { margin-bottom: 2rem; }
+
 .shop-hero h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 6vw, 4rem);
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: clamp(2rem, 6vw, 3.6rem);
   font-weight: 400;
-  line-height: 0.95;
+  line-height: 1;
   color: var(--navy);
+  letter-spacing: 2px;
 }
-.shop-hero h2 em { font-style: italic; color: #8b6914; }
+.shop-hero h2 em {
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 6.5vw, 4rem);
+  color: var(--or);
+}
 .shop-hero p {
   margin-top: 0.6rem;
   font-size: 0.7rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   color: var(--navy);
-  opacity: 0.6;
+  opacity: 0.55;
   text-transform: uppercase;
+  font-family: 'Sanchez', serif;
 }
 
 /* ─── Layout shop ─────────────────────────────── */
@@ -53,9 +58,10 @@
 
 /* ─── Preview vêtement ────────────────────────── */
 .preview-zone { position: sticky; top: 1rem; height: fit-content; }
+
 .garment-visual {
   aspect-ratio: 3/4;
-  border: 1px solid rgba(10, 29, 55, 0.2);
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,15 +69,17 @@
   gap: 1.5rem;
   position: relative;
   overflow: hidden;
-  background: rgba(10, 29, 55, 0.06);
+  background: rgba(10, 29, 55, 0.04);
   transition: background 0.4s ease;
 }
-.garment-visual.blanc { background: #e8e4d9; }
-.garment-visual.marine { background: var(--marine); }
+.garment-visual.blanc  { background: #e8e4d9; }
+.garment-visual.marine { background: #1a2744; }
+
 .garment-shape { width: 55%; transition: all 0.3s ease; }
 .garment-shape svg { width: 100%; height: auto; }
-.shape-fill-blanc .garment-path { fill: #f5f2eb; stroke: #ccc; }
+.shape-fill-blanc  .garment-path { fill: #f5f2eb; stroke: #ccc; }
 .shape-fill-marine .garment-path { fill: #1a2744; stroke: #2a3a5e; }
+
 .design-preview {
   position: absolute;
   bottom: 18%;
@@ -87,15 +95,16 @@
   opacity: 0.85;
   transition: all 0.4s ease;
 }
-.garment-visual.blanc .design-preview { color: #1a2744; }
-.garment-visual.marine .design-preview { color: #f5f2eb; }
+.garment-visual.blanc  .design-preview { color: #1a2744; }
+.garment-visual.marine .design-preview { color: var(--bg); }
+
 .garment-label {
   position: absolute;
   bottom: 1rem; left: 1rem;
   font-size: 0.55rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #8b6914;
+  color: var(--or);
   font-family: 'DM Mono', monospace;
 }
 .price-display {
@@ -104,30 +113,38 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 2rem;
   font-weight: 600;
-  color: #8b6914;
+  color: var(--or);
 }
 
 /* ─── Panel configuration ─────────────────────── */
 .config-panel { display: flex; flex-direction: column; gap: 1.5rem; }
 .config-section { display: flex; flex-direction: column; gap: 0.6rem; }
+
 .config-label {
-  font-family: 'DM Mono', monospace;
+  font-family: 'Sanchez', serif;
   font-size: 0.55rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #8b6914;
+  color: var(--or);
   padding-bottom: 0.4rem;
-  border-bottom: 1px solid rgba(10, 29, 55, 0.15);
+  border-bottom: 1px solid var(--border);
 }
-.options-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+
+.options-grid  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+.sizes-row,
+.colors-row    { display: flex; gap: 0.5rem; }
+.designs-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+
+/* Boutons option communs */
 .opt-btn, .size-btn, .color-btn, .design-btn {
   background: transparent;
-  border: 1px solid rgba(10, 29, 55, 0.2);
+  border: 1px solid var(--border);
   color: var(--navy);
   font-family: 'Sanchez', serif;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
+
 .opt-btn {
   font-size: 0.65rem;
   letter-spacing: 0.06em;
@@ -141,10 +158,10 @@
 .opt-price {
   font-size: 0.55rem;
   color: var(--navy);
-  opacity: 0.5;
+  opacity: 0.45;
   font-family: 'DM Mono', monospace;
 }
-.sizes-row, .colors-row { display: flex; gap: 0.5rem; }
+
 .size-btn {
   flex: 1;
   font-size: 0.8rem;
@@ -152,6 +169,7 @@
   padding: 0.7rem;
   font-family: 'DM Mono', monospace;
 }
+
 .color-btn {
   flex: 1;
   font-size: 0.65rem;
@@ -162,10 +180,10 @@
   align-items: center;
   gap: 0.6rem;
 }
-.color-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-.color-dot.blanc { background: #f5f2eb; border: 1px solid #ccc; }
-.color-dot.marine { background: #1a2744; border: 1px solid #2a3a5e; }
-.designs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.color-dot              { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.color-dot.blanc        { background: #f5f2eb; border: 1px solid #ccc; }
+.color-dot.marine       { background: #1a2744; border: 1px solid #2a3a5e; }
+
 .design-btn {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
@@ -180,20 +198,23 @@
   font-style: normal;
   font-size: 0.5rem;
   letter-spacing: 0.2em;
-  color: #8b6914;
+  color: var(--or);
   margin-bottom: 0.3rem;
   text-transform: uppercase;
 }
-.opt-btn:hover, .size-btn:hover, .color-btn:hover, .design-btn:hover {
-  border-color: rgba(10, 29, 55, 0.5);
-  background: rgba(10, 29, 55, 0.06);
+
+.opt-btn:hover, .size-btn:hover,
+.color-btn:hover, .design-btn:hover {
+  border-color: rgba(10, 29, 55, 0.45);
+  background: rgba(10, 29, 55, 0.05);
 }
-.opt-btn.selected, .size-btn.selected, .color-btn.selected, .design-btn.selected {
+.opt-btn.selected, .size-btn.selected,
+.color-btn.selected, .design-btn.selected {
   border-color: var(--navy);
-  background: rgba(10, 29, 55, 0.1);
+  background: rgba(10, 29, 55, 0.09);
 }
 
-/* ─── Bouton ajouter ──────────────────────────── */
+/* ─── Bouton « Ajouter au panier » ────────────── */
 .add-btn {
   width: 100%;
   padding: 1rem;
@@ -205,15 +226,20 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: background 0.25s ease;
   margin-top: 1rem;
 }
-.add-btn:hover { background: rgba(10, 29, 55, 0.08); }
-.add-btn:disabled { border-color: rgba(10, 29, 55, 0.2); color: rgba(10, 29, 55, 0.3); cursor: not-allowed; }
+.add-btn:hover { background: rgba(10, 29, 55, 0.07); }
+.add-btn:disabled {
+  border-color: var(--border);
+  color: rgba(10, 29, 55, 0.3);
+  cursor: not-allowed;
+}
 .add-btn:disabled:hover { background: transparent; }
+
 .missing-msg {
   font-size: 0.55rem;
-  color: rgba(10, 29, 55, 0.45);
+  color: rgba(10, 29, 55, 0.4);
   letter-spacing: 0.08em;
   text-align: center;
   margin-top: 0.4rem;
@@ -225,7 +251,7 @@
 .cart-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(10, 29, 55, 0.4);
   z-index: 3000;
   opacity: 0;
   pointer-events: none;
@@ -240,7 +266,7 @@
   max-width: 100vw;
   height: 100vh;
   background: var(--bg);
-  border-left: 1px solid rgba(10, 29, 55, 0.15);
+  border-left: 1px solid var(--border);
   z-index: 3001;
   transform: translateX(100%);
   transition: transform 0.35s ease;
@@ -252,7 +278,7 @@
 
 .cart-header {
   padding: 1.5rem;
-  border-bottom: 1px solid rgba(10, 29, 55, 0.12);
+  border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -260,13 +286,14 @@
 .cart-title {
   font-family: 'Uncial Antiqua', cursive;
   font-size: 1.3rem;
+  letter-spacing: 2px;
   color: var(--navy);
 }
 .cart-close {
   background: transparent;
   border: none;
   color: var(--navy);
-  opacity: 0.4;
+  opacity: 0.35;
   font-size: 1.2rem;
   cursor: pointer;
   transition: opacity 0.2s;
@@ -281,7 +308,10 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  scrollbar-width: none;
 }
+.cart-items::-webkit-scrollbar { display: none; }
+
 .cart-empty {
   display: flex;
   align-items: center;
@@ -289,13 +319,14 @@
   height: 100%;
   font-size: 0.65rem;
   color: var(--navy);
-  opacity: 0.4;
-  letter-spacing: 0.1em;
+  opacity: 0.35;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   font-family: 'DM Mono', monospace;
 }
+
 .cart-item {
-  border: 1px solid rgba(10, 29, 55, 0.12);
+  border: 1px solid var(--border);
   padding: 1rem;
   display: grid;
   grid-template-columns: 1fr auto;
@@ -307,6 +338,7 @@
   from { opacity: 0; transform: translateX(10px); }
   to   { opacity: 1; transform: translateX(0); }
 }
+
 .item-name {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1rem;
@@ -316,7 +348,7 @@
 .item-details {
   font-size: 0.58rem;
   color: var(--navy);
-  opacity: 0.55;
+  opacity: 0.5;
   letter-spacing: 0.08em;
   margin-top: 0.2rem;
   line-height: 1.7;
@@ -325,14 +357,14 @@
 .item-price {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
-  color: #8b6914;
+  color: var(--or);
 }
 .item-remove {
   background: transparent;
   border: none;
   color: var(--navy);
-  opacity: 0.25;
-  font-size: 0.65rem;
+  opacity: 0.22;
+  font-size: 0.62rem;
   cursor: pointer;
   transition: opacity 0.2s;
   padding: 0;
@@ -341,11 +373,11 @@
   margin-top: 0.3rem;
   font-family: 'DM Mono', monospace;
 }
-.item-remove:hover { opacity: 0.7; }
+.item-remove:hover { opacity: 0.65; }
 
 .cart-footer {
   padding: 1.5rem;
-  border-top: 1px solid rgba(10, 29, 55, 0.12);
+  border-top: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -360,17 +392,17 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--navy);
-  opacity: 0.5;
+  opacity: 0.45;
   font-family: 'DM Mono', monospace;
 }
 .cart-total-amount {
   font-family: 'Cormorant Garamond', serif;
   font-size: 2rem;
   font-weight: 600;
-  color: #8b6914;
+  color: var(--or);
 }
 
-/* ─── Bouton panier (header) ──────────────────── */
+/* ─── Bouton panier (header fixe) ─────────────── */
 .cart-header-btn {
   background: transparent;
   border: 1px solid rgba(10, 29, 55, 0.3);
@@ -381,7 +413,6 @@
   text-transform: uppercase;
   padding: 0.5rem 0.9rem;
   cursor: pointer;
-  transition: all 0.2s;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -391,13 +422,11 @@
   z-index: 700;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s, border-color 0.2s, color 0.2s;
+  transition: opacity 0.3s ease, border-color 0.2s ease;
 }
-.cart-header-btn.visible {
-  opacity: 1;
-  pointer-events: all;
-}
-.cart-header-btn:hover { border-color: var(--navy); }
+.cart-header-btn.visible { opacity: 1; pointer-events: all; }
+.cart-header-btn:hover   { border-color: var(--navy); }
+
 .cart-count-badge {
   background: var(--navy);
   color: var(--bg);
@@ -422,12 +451,13 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: background 0.25s ease;
 }
-.checkout-btn:hover { background: #0d2844; }
-.checkout-btn:disabled { background: rgba(10, 29, 55, 0.2); color: rgba(10, 29, 55, 0.4); cursor: not-allowed; }
+.checkout-btn:hover    { background: #0d2844; }
+.checkout-btn:disabled { background: rgba(10, 29, 55, 0.18); color: rgba(10, 29, 55, 0.38); cursor: not-allowed; }
+
 .checkout-loading { display: none; }
-.checkout-btn.loading .checkout-text { display: none; }
+.checkout-btn.loading .checkout-text   { display: none; }
 .checkout-btn.loading .checkout-loading { display: inline; }
 
 /* ─── Toast ───────────────────────────────────── */
@@ -450,23 +480,23 @@
 }
 .shop-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ─── Séparateur boutique ─────────────────────── */
+/* ─── Séparateur ──────────────────────────────── */
 .shop-divider {
   width: 40px;
   height: 1px;
   background: var(--navy);
-  opacity: 0.25;
+  opacity: 0.2;
   margin: 1rem 0;
 }
 
-/* ─── Responsive boutique ─────────────────────── */
+/* ─── Responsive ──────────────────────────────── */
 @media (max-width: 768px) {
   .shop-layout {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  .preview-zone { position: static; }
-  .garment-visual { aspect-ratio: 4/3; }
+  .preview-zone    { position: static; }
+  .garment-visual  { aspect-ratio: 4/3; }
   .cart-header-btn { right: 1rem; }
-  .cart-drawer { width: 100vw; }
+  .cart-drawer     { width: 100vw; }
 }
